@@ -4,10 +4,6 @@ services:
     image: ubuntu
     command: bash -c 'echo $${RANDOM} ; sleep 1'
     restart: always
-  logstash:
-    image: logstash:5
-    restart: on-failure
-    command: -e "input { udp { port => 5000 codec => json } } filter { if [docker][image] =~ /^logstash/ {  drop { } } } output { stdout { codec => rubydebug } }"
   logspout:
     image: bekt/logspout-logstash
     restart: on-failure
@@ -17,3 +13,7 @@ services:
       ROUTE_URIS: logstash://logstash:5000
     depends_on:
       - logstash
+  logstash:
+    image: logstash:5
+    restart: on-failure
+    command: -e "input { udp { port => 5000 codec => json } } filter { if [docker][image] =~ /^logstash/ {  drop { } } } output { stdout { codec => rubydebug } }"
