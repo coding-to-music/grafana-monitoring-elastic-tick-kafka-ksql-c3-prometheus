@@ -12,9 +12,21 @@ https://github.com/framiere/monitoring-demo
 
 ```java
 
+```
+
+## Useful Commands:
+
+```java
+
 # running containers
 docker ps -a
 
+alias dil="docker images"
+```
+
+## Useful Docker Aliases:
+
+```java
 # General
 alias dve="docker -v"
 alias dl="docker login --username=dragol"
@@ -96,12 +108,6 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin git@github.com:coding-to-music/grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus.git
 git push -u origin main
-```
-
-## Useful Commands:
-
-```java
-
 ```
 
 # 1. Introduction
