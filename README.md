@@ -154,26 +154,31 @@ example:
   command: echo hello world
 ```
 
-Run it with `docker-compose -f docker-compose-step1.yml`
+Run it with `docker-compose -f docker-compose-step1.yml up`
 
 ```bash
-$ docker-compose -f docker-compose-step1.yml up
+docker-compose -f docker-compose-step1.yml up
+```
+
+Output:
+
+```bash
 Creating network "monitoring-demo_default" with the default driver
-Creating monitoring-demo_example_1 ...
-Creating monitoring-demo_example_1 ... done
-Attaching to monitoring-demo_example_1
+Creating grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1 ...
+Creating grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1 ... done
+Attaching to grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1
 example_1  | hello world
-monitoring-demo_example_1 exited with code 0
+grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1 exited with code 0
 ```
 
 `Hello world` has been writen on `stdout`. How fancy !
 
 The output of the container has also been captured by docker.
 
-Run `docker logs monitoring-demo_example_1` you should see
+Run `docker logs grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1` you should see
 
 ```bash
-$ docker logs monitoring-demo_example_1
+$ docker logs grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1
 hello world
 ```
 
@@ -186,10 +191,10 @@ graph LR;
     Docker -- write to --> File;
 ```
 
-In order to know where it's stored just inspect the container with `docker inspect monitoring-demo_example_1` you should see
+In order to know where it's stored just inspect the container with `docker inspect grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1` you should see
 
 ```bash
-$ docker inspect monitoring-demo_example_1
+$ docker inspect grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1
 [
     {
         "Id": "cf1a86e1dc9ac16bc8f60b234f9b3e6310bd591dc385bc1da8e1081d2837752a",
@@ -216,14 +221,14 @@ $ docker inspect monitoring-demo_example_1
 That's a lot of different information, let's look for the log info
 
 ```bash
-$ docker inspect monitoring-demo_example_1 | grep log
+$ docker inspect grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1 | grep log
         "LogPath": "/var/lib/docker/containers/cf1a86e1dc9ac16bc8f60b234f9b3e6310bd591dc385bc1da8e1081d2837752a/cf1a86e1dc9ac16bc8f60b234f9b3e6310bd591dc385bc1da8e1081d2837752a-json.log",
 ```
 
 Perfect, let's extract that field now with [jq](https://stedolan.github.io/jq/)
 
 ```bash
-$ docker inspect monitoring-demo_example_1 | jq -r '.[].LogPath'
+$ docker inspect grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1 | jq -r '.[].LogPath'
 /var/lib/docker/containers/cf1a86e1dc9ac16bc8f60b234f9b3e6310bd591dc385bc1da8e1081d2837752a/cf1a86e1dc9ac16bc8f60b234f9b3e6310bd591dc385bc1da8e1081d2837752a-json.log
 ```
 
@@ -295,11 +300,11 @@ Run the demo with `docker-compose -f docker-compose-step2.yml up`, you should se
 $ docker-compose -f docker-compose-step2.yml up
 Recreating monitoring-demo_logstash_1 ...
 Recreating monitoring-demo_logstash_1
-Starting monitoring-demo_example_1 ...
+Starting grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1 ...
 Recreating monitoring-demo_logstash_1 ... done
 Recreating monitoring-demo_logspout_1 ...
 Recreating monitoring-demo_logspout_1 ... done
-Attaching to monitoring-demo_example_1, monitoring-demo_logstash_1, monitoring-demo_logspout_1
+Attaching to grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1, monitoring-demo_logstash_1, monitoring-demo_logspout_1
 example_1   | 11597
 example_1   | 9666
 example_1   | 3226
@@ -316,7 +321,7 @@ logstash_1  |        "message" => "10854",
 logstash_1  |         "docker" => {
 logstash_1  |            "image" => "ubuntu",
 logstash_1  |         "hostname" => "15716aaf6095",
-logstash_1  |             "name" => "/monitoring-demo_example_1",
+logstash_1  |             "name" => "/grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1",
 logstash_1  |               "id" => "15716aaf6095efdde8ab3e566a911aac284e63d3c949dd19ddfd64258d20de9b",
 logstash_1  |           "labels" => nil
 logstash_1  |     },
@@ -398,8 +403,8 @@ Run the demo with `docker-compose -f docker-compose-step3.yml up`
 
 ```bash
 $ docker-compose -f docker-compose-step3.yml up
-Starting monitoring-demo_example_1 ...
-Starting monitoring-demo_example_1
+Starting grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1 ...
+Starting grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1
 Creating monitoring-demo_elasticsearch_1 ...
 Creating monitoring-demo_elasticsearch_1 ... done
 Recreating monitoring-demo_logstash_1 ...
@@ -408,7 +413,7 @@ Creating monitoring-demo_kibana_1 ...
 Recreating monitoring-demo_logstash_1 ... done
 Recreating monitoring-demo_logspout_1 ...
 Recreating monitoring-demo_logspout_1 ... done
-Attaching to monitoring-demo_example_1, monitoring-demo_elasticsearch_1, monitoring-demo_logstash_1, monitoring-demo_kibana_1, monitoring-demo_logspout_1
+Attaching to grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1, monitoring-demo_elasticsearch_1, monitoring-demo_logstash_1, monitoring-demo_kibana_1, monitoring-demo_logspout_1
 ...
 ... snip snip ...
 ...
