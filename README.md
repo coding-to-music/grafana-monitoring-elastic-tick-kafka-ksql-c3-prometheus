@@ -55,7 +55,7 @@ alias dnrm="docker network rm"
 alias dnp="docker network prune -f"
 # Explanation
 # dnl - list networks
-# dni - here you need to pass network id in order to see it's details
+# dni - here you need to pass network id in order to see its details
 # dnrm - here you need to pass network id in order to delete it
 # dnp - remove all dangling networks
 
@@ -70,7 +70,7 @@ alias dvi="docker volume inspect"
 # dvl - list volumes
 # dvrm - here you need to pass volume id in order to delete it
 # dvp - remove all dangling volumes
-# dvi - here you need to pass volumeid in order to see it's details
+# dvi - here you need to pass volumeid in order to see its details
 
 # Docker-Compose
 alias dcv="docker-compose -v"
