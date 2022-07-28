@@ -425,6 +425,44 @@ Now look at the logs in kibana
 - click discover
 - win !
 
+## Getting these errors:
+
+```
+lasticsearch connection is working {:healthcheck_url=>http://elasticsearch:9200/, :path=>"/"}
+logstash_1              | 21:49:14.760 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] WARN  logstash.outputs.elasticsearch - Attempted to resurrect connection to dead ES instance, but got an error. {:url=>"http://elasticsearch:9200/", :error_type=>LogStash::Outputs::ElasticSearch::HttpClient::Pool::HostUnreachableError, :error=>"Elasticsearch Unreachable: [http://elasticsearch:9200/][Manticore::SocketException] Connection refused (Connection refused)"}
+elasticsearch_1         | [2022-07-28T21:49:16,143][INFO ][o.e.n.Node               ] initialized
+elasticsearch_1         | [2022-07-28T21:49:16,144][INFO ][o.e.n.Node               ] [NvmQ9Fo] starting ...
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:16Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:16Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:17Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:17Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+elasticsearch_1         | [2022-07-28T21:49:17,079][INFO ][o.e.t.TransportService   ] [NvmQ9Fo] publish_address {192.168.224.2:9300}, bound_addresses {0.0.0.0:9300}
+elasticsearch_1         | [2022-07-28T21:49:17,092][INFO ][o.e.b.BootstrapChecks    ] [NvmQ9Fo] bound or publishing to a non-loopback or non-link-local address, enforcing bootstrap checks
+elasticsearch_1         | ERROR: [1] bootstrap checks failed
+elasticsearch_1         | [1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+elasticsearch_1         | [2022-07-28T21:49:17,122][INFO ][o.e.n.Node               ] [NvmQ9Fo] stopping ...
+elasticsearch_1         | [2022-07-28T21:49:17,235][INFO ][o.e.n.Node               ] [NvmQ9Fo] stopped
+elasticsearch_1         | [2022-07-28T21:49:17,237][INFO ][o.e.n.Node               ] [NvmQ9Fo] closing ...
+elasticsearch_1         | [2022-07-28T21:49:17,272][INFO ][o.e.n.Node               ] [NvmQ9Fo] closed
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:17Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:17Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+
+and
+
+logstash_1              | 21:49:29.788 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] INFO  logstash.outputs.elasticsearch - Running health check to see if an Elasticsearch connection is working {:healthcheck_url=>http://elasticsearch:9200/, :path=>"/"}
+logstash_1              | 21:49:29.793 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] WARN  logstash.outputs.elasticsearch - Attempted to resurrect connection to dead ES instance, but got an error. {:url=>"http://elasticsearch:9200/", :error_type=>LogStash::Outputs::ElasticSearch::HttpClient::Pool::HostUnreachableError, :error=>"Elasticsearch Unreachable: [http://elasticsearch:9200/][Manticore::SocketException] Connection refused (Connection refused)"}
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:31Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:31Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:32Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:32Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:32Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:32Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+elasticsearch_1         | [2022-07-28T21:49:34,148][INFO ][o.e.x.m.j.p.l.CppLogMessageHandler] [controller/48] [Main.cc@128] controller (64 bit): Version 5.6.0 (Build 93aea61f57f7d8) Copyright (c) 2017 Elasticsearch BV
+elasticsearch_1         | [2022-07-28T21:49:34,272][INFO ][o.e.d.DiscoveryModule    ] [NvmQ9Fo] using discovery type [zen]
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:34Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                | {"type":"log","@timestamp":"2022-07-28T21:49:34Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+```
+
 # 5. Elasticsearch Metrics !
 
 Docker has metrics about the state of each container, but also what is does consume, let's leverage that !
@@ -467,6 +505,30 @@ Run the demo with `docker-compose -f docker-compose-step4.yml up` then look at t
 - [raw metrics](<http://localhost:5601/app/kibana#/discover?_g=()&_a=(columns:!(_source),index:'metricbeat-*',interval:auto,query:(match_all:()),sort:!('@timestamp',desc))>)
 - [dashboards list](<http://localhost:5601/app/kibana#/dashboards?_g=()>)
 - [system dashboard](<http://localhost:5601/app/kibana#/dashboard/Metricbeat-filesystem?_g=()&_a=(description:'',filters:!(),options:(darkTheme:!f),panels:!((col:1,id:System-Navigation,panelIndex:1,row:1,size_x:2,size_y:4,type:visualization),(col:1,id:Top-hosts-by-disk-size,panelIndex:5,row:10,size_x:12,size_y:4,type:visualization),(col:4,id:Disk-space-overview,panelIndex:6,row:1,size_x:9,size_y:4,type:visualization),(col:1,id:Free-disk-space-over-days,panelIndex:7,row:5,size_x:6,size_y:5,type:visualization),(col:7,id:Total-files-over-days,panelIndex:8,row:5,size_x:6,size_y:5,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),timeRestore:!f,title:Metricbeat-filesystem,uiState:(P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n))))),viewMode:view)>)
+
+## Getting these Errors:
+
+```
+logstash_1                    | 22:03:38.806 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] INFO  logstash.outputs.elasticsearch - Running health check to see if an Elasticsearch connection is working {:healthcheck_url=>http://elasticsearch:9200/, :path=>"/"}
+logstash_1                    | 22:03:38.817 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] WARN  logstash.outputs.elasticsearch - Attempted to resurrect connection to dead ES instance, but got an error. {:url=>"http://elasticsearch:9200/", :error_type=>LogStash::Outputs::ElasticSearch::HttpClient::Pool::HostUnreachableError, :error=>"Elasticsearch Unreachable: [http://elasticsearch:9200/][Manticore::SocketException] Connection refused (Connection refused)"}
+metricbeat_1                  | 2022/07/28 22:03:39.500005 metrics.go:39: INFO Non-zero metrics in the last 30s: fetches.system-cpu.events=3 fetches.system-cpu.success=3 fetches.system-filesystem.events=2 fetches.system-filesystem.success=1 fetches.system-fsstat.events=1 fetches.system-fsstat.success=1 fetches.system-load.events=3 fetches.system-load.success=3 fetches.system-memory.events=3 fetches.system-memory.success=3 fetches.system-network.events=6 fetches.system-network.success=3 fetches.system-process.events=3 fetches.system-process.success=3 fetches.system-socket.success=60 libbeat.outputs.messages_dropped=1 libbeat.publisher.messages_in_worker_queues=21 libbeat.publisher.published_events=21
+kibana_1                      | {"type":"log","@timestamp":"2022-07-28T22:03:40Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+
+and
+
+kibana_1                      | {"type":"log","@timestamp":"2022-07-28T22:03:43Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-28T22:03:43Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_metricbeat_1                 ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logspout_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logstash_1                   ...
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kibana_1                     ...
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_elasticsearch_1              ...
+Stopping cdf6d2559676_grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1       ... done
+Killing grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logstash_1                    ... done
+Killing grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kibana_1                      ... error
+Killing grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_elasticsearch_1               ... done
+```
 
 # 6. Better metrics: the TICK stack
 
