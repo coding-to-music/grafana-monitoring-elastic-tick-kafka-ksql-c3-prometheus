@@ -770,6 +770,49 @@ Go at the bottom of the page ... here are the logs for the container you are loo
 
 You can create alerts etc. That's great.
 
+## Getting these Errors:
+
+```
+chronograf_1                  | time="2022-07-29T04:20:18Z" level=info msg=Request component=server method=GET remote_addr="192.168.224.1:36480" url=/chronograf/v1/me
+chronograf_1                  | time="2022-07-29T04:20:18Z" level=info msg="Response: OK" code=200 component=server remote_addr="192.168.224.1:36480" response_time="141.286µs"
+telegraf_1                    | 2022-07-29T04:20:20Z E! Error in plugin [inputs.elasticsearch]: Get http://elasticsearch:9200/_nodes/stats: dial tcp 192.168.224.2:9200: getsockopt: connection refused
+kapacitor_1                   | [httpd] 192.168.224.3 - - [29/Jul/2022:04:20:20 +0000] "POST /write?consistency=&db=_internal&precision=ns&rp=monitor HTTP/1.1" 204 0 "-" "InfluxDBClient" c1d46b6e-0ef5-11ed-8029-000000000000 455
+kapacitor_1                   | [httpd] 192.168.224.3 - - [29/Jul/2022:04:20:20 +0000] "POST /write?consistency=&db=telegraf&precision=ns&rp=autogen HTTP/1.1" 204 0 "-" "InfluxDBClient" c2121b37-0ef5-11ed-802a-000000000000 11517
+influxdb_1                    | [httpd] 192.168.224.10 - - [29/Jul/2022:04:20:20 +0000] "POST /write?db=telegraf HTTP/1.1" 204 0 "-" "-" c201d543-0ef5-11ed-8036-000000000000 128805
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:20:21Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:20:21Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:20:21Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:20:21Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:20:21Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:20:21Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+elasticsearch_1               | [2022-07-29T04:20:22,159][INFO ][o.e.n.Node               ] [] initializing ...
+elasticsearch_1               | [2022-07-29T04:20:22,552][INFO ][o.e.e.NodeEnvironment    ] [NvmQ9Fo] using [1] data paths, mounts [[/ (overlay)]], net usable_space [32.5gb], net total_space [77.3gb], spins? [possibly], types [overlay]
+elasticsearch_1               | [2022-07-29T04:20:22,556][INFO ][o.e.e.NodeEnvironment    ] [NvmQ9Fo] heap size [1.9gb], compressed ordinary object pointers [true]
+elasticsearch_1               | [2022-07-29T04:20:22,565][INFO ][o.e.n.Node               ] node name [NvmQ9Fo] derived from node ID [NvmQ9FoMQ8yrvoXl5PdI_Q]; set [node.name] to override
+elasticsearch_1               | [2022-07-29T04:20:22,566][INFO ][o.e.n.Node               ] version[5.6.0], pid[1], build[781a835/2017-09-07T03:09:58.087Z], OS[Linux/5.4.0-122-generic/amd64], JVM[Oracle Corporation/OpenJDK 64-Bit Server VM/1.8.0_141/25.141-b16]
+elasticsearch_1               | [2022-07-29T04:20:22,569][INFO ][o.e.n.Node               ] JVM arguments [-Xms2g, -Xmx2g, -XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -Djdk.io.permissionsUseCanonicalPath=true, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -Dlog4j.skipJansi=true, -XX:+HeapDumpOnOutOfMemoryError, -Des.cgroups.hierarchy.override=/, -Des.path.home=/usr/share/elasticsearch]
+logstash_1                    | 04:20:23.455 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] INFO  logstash.outputs.elasticsearch - Running health check to see if an Elasticsearch connection is working {:healthcheck_url=>http://elasticsearch:9200/, :path=>"/"}
+logstash_1                    | 04:20:23.460 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] WARN  logstash.outputs.elasticsearch - Attempted to resurrect connection to dead ES instance, but got an error. {:url=>"http://elasticsearch:9200/", :error_type=>LogStash::Outputs::ElasticSearch::HttpClient::Pool::HostUnreachableError, :error=>"Elasticsearch Unreachable: [http://elasticsearch:9200/][Manticore::SocketException] Connection refused (Connection refused)"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:20:23Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:20:23Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:20:23Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:20:23Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:20:24Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:20:24Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_grafana_1                    ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_chronograf_1                 ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_telegraf_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kapacitor_1                  ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_influxdb_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_metricbeat_1                 ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logspout_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logstash_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kibana_1                     ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_elasticsearch_1              ... done
+Stopping cdf6d2559676_grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1       ... done
+```
+
 # 8. Kafka the data hub
 
 We can't have all this data for ourselves right ? We most probably are not the same users.
