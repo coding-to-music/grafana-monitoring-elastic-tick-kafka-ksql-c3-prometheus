@@ -1203,6 +1203,10 @@ You can now create live diagrams !
 
 ![live diagrams](https://raw.githubusercontent.com/jdbranham/grafana-diagram/master/src/img/diagram.PNG?raw=true "diagram")
 
+![intro](./images/intro.gif)
+![remote-diagram](./images/remote-diagram.gif)
+![variables](./images/variables.gif)
+
 ## Getting these Errors:
 
 ```
