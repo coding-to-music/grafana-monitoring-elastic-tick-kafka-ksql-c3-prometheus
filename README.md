@@ -1010,7 +1010,6 @@ mbean = "kafka.server:type=BrokerTopicMetrics,name=MessagesInPerSec"
 [[inputs.jolokia.metrics]]
 name = "bytes_in"
 mbean = "kafka.server:type=BrokerTopicMetrics,name=BytesInPerSec"
-
 ```
 
 Then configure telegraf to use the new configuration with jolokia input
@@ -1054,6 +1053,31 @@ jolokia,jolokia_name=kafka,jolokia_port=8778,jolokia_host=kafka,host=cde5575b52a
 ```
 
 Well looks like we do !
+
+## Getting these Errors:
+
+```
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:34:04Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:34:04Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+logstash_1                    | 04:34:04.653 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] INFO  logstash.outputs.elasticsearch - Running health check to see if an Elasticsearch connection is working {:healthcheck_url=>http://elasticsearch:9200/, :path=>"/"}
+logstash_1                    | 04:34:04.658 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] WARN  logstash.outputs.elasticsearch - Attempted to resurrect connection to dead ES instance, but got an error. {:url=>"http://elasticsearch:9200/", :error_type=>LogStash::Outputs::ElasticSearch::HttpClient::Pool::HostUnreachableError, :error=>"Elasticsearch Unreachable: [http://elasticsearch:9200/][Manticore::SocketException] Connection refused (Connection refused)"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:34:06Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:34:06Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:34:06Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:34:06Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_zookeeper_1                  ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_grafana_1                    ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_chronograf_1                 ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kapacitor_1                  ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_influxdb_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_metricbeat_1                 ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logspout_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logstash_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kibana_1                     ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_elasticsearch_1              ... done
+Stopping cdf6d2559676_grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1       ... done
+```
 
 # 10. Let's do some manual monitoring
 
@@ -1122,6 +1146,39 @@ Run the demo `docker-compose -f docker-compose-step9.yml up`
 
 You can now graph on slowness of consumers.
 
+## Getting these Errors:
+
+```
+cdf6d2559676_grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1 exited with code 0
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:41:26Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:41:26Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:41:26Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:41:27Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:41:27Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:41:27Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+logstash_1                    | 04:41:27.690 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] INFO  logstash.outputs.elasticsearch - Running health check to see if an Elasticsearch connection is working {:healthcheck_url=>http://elasticsearch:9200/, :path=>"/"}
+logstash_1                    | 04:41:27.698 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] WARN  logstash.outputs.elasticsearch - Attempted to resurrect connection to dead ES instance, but got an error. {:url=>"http://elasticsearch:9200/", :error_type=>LogStash::Outputs::ElasticSearch::HttpClient::Pool::HostUnreachableError, :error=>"Elasticsearch Unreachable: [http://elasticsearch:9200/][Manticore::SocketException] Connection refused (Connection refused)"}
+chronograf_1                  | time="2022-07-29T04:41:28Z" level=info msg=Request component=server method=GET remote_addr="192.168.224.1:60862" url=/chronograf/v1/me
+chronograf_1                  | time="2022-07-29T04:41:28Z" level=info msg="Response: OK" code=200 component=server remote_addr="192.168.224.1:60862" response_time="709.032µs"
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_slow-consumer-kafka-lag_1    ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_fast-consumer-kafka-lag_1    ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_telegraf_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_slow-kafka-consumer_1        ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_fast-kafka-consumer_1        ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_zookeeper_1                  ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_grafana_1                    ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_chronograf_1                 ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kapacitor_1                  ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_influxdb_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_metricbeat_1                 ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logspout_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logstash_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kibana_1                     ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_elasticsearch_1              ... done
+Stopping cdf6d2559676_grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1       ... done
+```
+
 # 11. Self descriptive visualizations
 
 Let's rely on [jdbranham-diagram-panel](https://grafana.com/plugins/jdbranham-diagram-panel) to show pretty diagram that will be live
@@ -1145,6 +1202,40 @@ Run the demo `docker-compose -f docker-compose-step10.yml up`
 You can now create live diagrams !
 
 ![live diagrams](https://raw.githubusercontent.com/jdbranham/grafana-diagram/master/src/img/diagram.PNG?raw=true "diagram")
+
+## Getting these Errors:
+
+```
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:47:07Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:47:07Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:47:07Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:47:07Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+logstash_1                    | 04:47:08.478 [[main]>worker0] WARN  logstash.outputs.elasticsearch - UNEXPECTED POOL ERROR {:e=>#<LogStash::Outputs::ElasticSearch::HttpClient::Pool::NoConnectionAvailableError: No Available connections>}
+logstash_1                    | 04:47:08.479 [[main]>worker0] ERROR logstash.outputs.elasticsearch - Attempted to send a bulk request to elasticsearch, but no there are no living connections in the connection pool. Perhaps Elasticsearch is unreachable or down? {:error_message=>"No Available connections", :class=>"LogStash::Outputs::ElasticSearch::HttpClient::Pool::NoConnectionAvailableError", :will_retry_in_seconds=>64}
+logstash_1                    | 04:47:08.505 [[main]>worker1] WARN  logstash.outputs.elasticsearch - UNEXPECTED POOL ERROR {:e=>#<LogStash::Outputs::ElasticSearch::HttpClient::Pool::NoConnectionAvailableError: No Available connections>}
+logstash_1                    | 04:47:08.506 [[main]>worker1] ERROR logstash.outputs.elasticsearch - Attempted to send a bulk request to elasticsearch, but no there are no living connections in the connection pool. Perhaps Elasticsearch is unreachable or down? {:error_message=>"No Available connections", :class=>"LogStash::Outputs::ElasticSearch::HttpClient::Pool::NoConnectionAvailableError", :will_retry_in_seconds=>64}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:47:09Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:47:09Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:47:09Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:47:09Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:47:09Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:47:09Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kapacitor_1                   | [httpd] 192.168.224.5 - - [29/Jul/2022:04:47:10 +0000] "POST /write?consistency=&db=_internal&precision=ns&rp=monitor HTTP/1.1" 204 0 "-" "InfluxDBClient" 817bc2e2-0ef9-11ed-800d-000000000000 1153
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_group-kafka-lag_1            ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_slow-kafka-consumer_1        ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_grafana_1                    ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_zookeeper_1                  ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_chronograf_1                 ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kapacitor_1                  ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_influxdb_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_metricbeat_1                 ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logspout_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logstash_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kibana_1                     ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_elasticsearch_1              ... done
+Stopping cdf6d2559676_grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1       ... done
+```
 
 # 12. Your sql databases are back
 
