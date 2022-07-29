@@ -903,6 +903,51 @@ We are in a pretty good shape right ?
 
 Well, we can do better. We have many jvm based components such as kafka, and we know its monitoring is based on the JMX standard.
 
+## Getting these Errors:
+
+```
+metricbeat_1                  | 2022/07/29 04:29:53.366511 metrics.go:39: INFO Non-zero metrics in the last 30s: fetches.system-cpu.events=3 fetches.system-cpu.success=3 fetches.system-filesystem.events=2 fetches.system-filesystem.success=1 fetches.system-fsstat.events=1 fetches.system-fsstat.success=1 fetches.system-load.events=3 fetches.system-load.success=3 fetches.system-memory.events=3 fetches.system-memory.success=3 fetches.system-network.events=6 fetches.system-network.success=3 fetches.system-process.events=3 fetches.system-process.success=3 fetches.system-socket.success=60 libbeat.publisher.messages_in_worker_queues=21 libbeat.publisher.published_events=21
+elasticsearch_1               | [2022-07-29T04:29:53,749][INFO ][o.e.x.m.j.p.l.CppLogMessageHandler] [controller/50] [Main.cc@128] controller (64 bit): Version 5.6.0 (Build 93aea61f57f7d8) Copyright (c) 2017 Elasticsearch BV
+elasticsearch_1               | [2022-07-29T04:29:53,903][INFO ][o.e.d.DiscoveryModule    ] [NvmQ9Fo] using discovery type [zen]
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:29:54Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:29:54Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:29:54Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:29:54Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:29:54Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:29:54Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+logstash_1                    | 04:29:54.351 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] INFO  logstash.outputs.elasticsearch - Running health check to see if an Elasticsearch connection is working {:healthcheck_url=>http://elasticsearch:9200/, :path=>"/"}
+logstash_1                    | 04:29:54.355 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] WARN  logstash.outputs.elasticsearch - Attempted to resurrect connection to dead ES instance, but got an error. {:url=>"http://elasticsearch:9200/", :error_type=>LogStash::Outputs::ElasticSearch::HttpClient::Pool::HostUnreachableError, :error=>"Elasticsearch Unreachable: [http://elasticsearch:9200/][Manticore::SocketException] Connection refused (Connection refused)"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:29:56Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:29:56Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:29:56Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:29:56Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:29:57Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"Unable to revive connection: http://elasticsearch:9200/"}
+kibana_1                      | {"type":"log","@timestamp":"2022-07-29T04:29:57Z","tags":["warning","elasticsearch","admin"],"pid":1,"message":"No living connections"}
+elasticsearch_1               | [2022-07-29T04:29:57,108][INFO ][o.e.n.Node               ] initialized
+elasticsearch_1               | [2022-07-29T04:29:57,108][INFO ][o.e.n.Node               ] [NvmQ9Fo] starting ...
+elasticsearch_1               | [2022-07-29T04:29:58,153][INFO ][o.e.t.TransportService   ] [NvmQ9Fo] publish_address {192.168.224.2:9300}, bound_addresses {0.0.0.0:9300}
+elasticsearch_1               | [2022-07-29T04:29:58,186][INFO ][o.e.b.BootstrapChecks    ] [NvmQ9Fo] bound or publishing to a non-loopback or non-link-local address, enforcing bootstrap checks
+elasticsearch_1               | ERROR: [1] bootstrap checks failed
+elasticsearch_1               | [1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+elasticsearch_1               | [2022-07-29T04:29:58,219][INFO ][o.e.n.Node               ] [NvmQ9Fo] stopping ...
+elasticsearch_1               | [2022-07-29T04:29:58,320][INFO ][o.e.n.Node               ] [NvmQ9Fo] stopped
+elasticsearch_1               | [2022-07-29T04:29:58,321][INFO ][o.e.n.Node               ] [NvmQ9Fo] closing ...
+elasticsearch_1               | [2022-07-29T04:29:58,367][INFO ][o.e.n.Node               ] [NvmQ9Fo] closed
+elasticsearch_1               | [2022-07-29T04:29:58,377][INFO ][o.e.x.m.j.p.NativeController] Native controller process has stopped - no new native processes can be started
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_zookeeper_1                  ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_grafana_1                    ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_chronograf_1                 ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kapacitor_1                  ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_influxdb_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_metricbeat_1                 ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logspout_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logstash_1                   ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kibana_1                     ... done
+Stopping grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_elasticsearch_1              ... done
+Stopping cdf6d2559676_grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1       ... done
+```
+
 # 9. Enter JMX !
 
 Telegraf is a go application, it does not speak jvm natively. However it speaks [jolokia](https://jolokia.org/).
