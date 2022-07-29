@@ -8,6 +8,14 @@ From / By Florent Ramière https://github.com/framiere/monitoring-demo
 
 https://github.com/framiere/monitoring-demo
 
+https://jdbranham.github.io/grafana-diagram/
+
+http://localhost:3000 Grafana
+
+http://localhost:5601 Kibana
+
+http://localhost:8888 Chronograf
+
 ## Environment variables:
 
 ```java
@@ -1202,6 +1210,8 @@ Run the demo `docker-compose -f docker-compose-step10.yml up`
 You can now create live diagrams !
 
 ![live diagrams](https://raw.githubusercontent.com/jdbranham/grafana-diagram/master/src/img/diagram.PNG?raw=true "diagram")
+
+https://jdbranham.github.io/grafana-diagram/
 
 ![intro](./images/intro.gif)
 ![remote-diagram](./images/remote-diagram.gif)
