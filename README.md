@@ -469,6 +469,51 @@ Now look at the logs in kibana
 ## Getting these errors:
 
 ```
+Starting grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1       ... done
+Creating grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_elasticsearch_1 ... done
+Recreating grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logstash_1    ... done
+Creating grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kibana_1        ... done
+Recreating grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logspout_1           ... done
+Creating grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kibana_index_pattern_1 ... done
+Attaching to grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1, grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_elasticsearch_1, grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logstash_1, grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kibana_1, grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logspout_1, grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kibana_index_pattern_1
+example_1               | 21647
+kibana_index_pattern_1  |   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+kibana_index_pattern_1  |                                  Dload  Upload   Total   Spent    Left  Speed
+logspout_1              | # logspout v3.2.6-custom by gliderlabs
+logspout_1              | # adapters: raw udp tcp logstash
+logspout_1              | # options : persist:/mnt/routes
+logspout_1              | # jobs    : http[]:80 pump routes
+logspout_1              | # routes  :
+logspout_1              | #   ADAPTER   ADDRESS         CONTAINERS      SOURCES OPTIONS
+logspout_1              | #   logstash  logstash:5000                           map[]
+logspout_1              | 2022/09/01 21:52:08 logstash: could not write:write udp 172.21.0.6:39166->172.21.0.5:5000: write: connection refused
+grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1 exited with code 0
+example_1               | 31254
+elasticsearch_1         | [2022-09-01T21:52:13,155][INFO ][o.e.n.Node               ] [] initializing ...
+logspout_1              | 2022/09/01 21:52:13 logstash: could not write:write udp 172.21.0.6:44771->172.21.0.5:5000: write: connection refused
+grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logspout_1 exited with code 1
+  0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0curl: (6) Could not resolve host: bash
+grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1 exited with code 0
+elasticsearch_1         | [2022-09-01T21:52:13,917][INFO ][o.e.e.NodeEnvironment    ] [sJLBIJ4] using [1] data paths, mounts [[/ (overlay)]], net usable_space [11.5gb], net total_space [77.3gb], spins? [possibly], types [overlay]
+elasticsearch_1         | [2022-09-01T21:52:13,918][INFO ][o.e.e.NodeEnvironment    ] [sJLBIJ4] heap size [1.9gb], compressed ordinary object pointers [true]
+elasticsearch_1         | [2022-09-01T21:52:13,919][INFO ][o.e.n.Node               ] node name [sJLBIJ4] derived from node ID [sJLBIJ4uR8mBIY3I80yN5g]; set [node.name] to override
+elasticsearch_1         | [2022-09-01T21:52:13,920][INFO ][o.e.n.Node               ] version[5.6.0], pid[1], build[781a835/2017-09-07T03:09:58.087Z], OS[Linux/5.4.0-125-generic/amd64], JVM[Oracle Corporation/OpenJDK 64-Bit Server VM/1.8.0_141/25.141-b16]
+elasticsearch_1         | [2022-09-01T21:52:13,920][INFO ][o.e.n.Node               ] JVM arguments [-Xms2g, -Xmx2g, -XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -Djdk.io.permissionsUseCanonicalPath=true, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -Dlog4j.skipJansi=true, -XX:+HeapDumpOnOutOfMemoryError, -Des.cgroups.hierarchy.override=/, -Des.path.home=/usr/share/elasticsearch]
+grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_kibana_index_pattern_1 exited with code 6
+logspout_1              | # logspout v3.2.6-custom by gliderlabs
+logspout_1              | # adapters: logstash raw udp tcp
+logspout_1              | # options : persist:/mnt/routes
+logspout_1              | # jobs    : http[]:80 pump routes
+logspout_1              | # routes  :
+logspout_1              | #   ADAPTER   ADDRESS         CONTAINERS      SOURCES OPTIONS
+logspout_1              | #   logstash  logstash:5000                           map[]
+logspout_1              | 2022/09/01 21:52:15 logstash: could not write:write udp 172.21.0.2:46560->172.21.0.5:5000: write: connection refused
+grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_logspout_1 exited with code 1
+```
+
+and
+
+```
 lasticsearch connection is working {:healthcheck_url=>http://elasticsearch:9200/, :path=>"/"}
 logstash_1              | 21:49:14.760 [Ruby-0-Thread-5: /usr/share/logstash/vendor/bundle/jruby/1.9/gems/logstash-output-elasticsearch-7.4.3-java/lib/logstash/outputs/elasticsearch/http_client/pool.rb:228] WARN  logstash.outputs.elasticsearch - Attempted to resurrect connection to dead ES instance, but got an error. {:url=>"http://elasticsearch:9200/", :error_type=>LogStash::Outputs::ElasticSearch::HttpClient::Pool::HostUnreachableError, :error=>"Elasticsearch Unreachable: [http://elasticsearch:9200/][Manticore::SocketException] Connection refused (Connection refused)"}
 elasticsearch_1         | [2022-07-28T21:49:16,143][INFO ][o.e.n.Node               ] initialized
