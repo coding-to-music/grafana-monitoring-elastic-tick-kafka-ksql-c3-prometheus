@@ -339,6 +339,39 @@ logstash_1  | }
 
 **Note:** Along the message is container metadata! This will be of **tremendous** help while debugging your cluster !
 
+## Output
+
+```
+logspout_1  | # logspout v3.2.6-custom by gliderlabs
+logspout_1  | # adapters: logstash raw udp tcp
+logspout_1  | # options : persist:/mnt/routes
+logspout_1  | # jobs    : routes http[]:80 pump
+logspout_1  | # routes  :
+logspout_1  | #   ADAPTER       ADDRESS         CONTAINERS      SOURCES OPTIONS
+logspout_1  | #   logstash      logstash:5000                           map[]
+logspout_1  | 2022/09/01 20:41:31 logstash: could not write:write udp 172.21.0.4:54914->172.21.0.3:5000: write: connection refused
+
+# and
+
+logspout_1  | # logspout v3.2.6-custom by gliderlabs
+logspout_1  | # adapters: raw udp tcp logstash
+logspout_1  | # options : persist:/mnt/routes
+logspout_1  | !! lookup logstash: Try again
+logspout_1  | # logspout v3.2.6-custom by gliderlabs
+logspout_1  | # adapters: logstash raw udp tcp
+logspout_1  | # options : persist:/mnt/routes
+logspout_1  | !! lookup logstash: Try again
+
+and
+
+logstash_1  | https://www.elastic.co/guide/en/logstash/current/monitoring-with-metricbeat.html
+logstash_1  | [2022-09-01T21:45:13,185][INFO ][logstash.licensechecker.licensereader] Elasticsearch pool URLs updated {:changes=>{:removed=>[], :added=>[http://elasticsearch:9200/]}}
+logstash_1  | [2022-09-01T21:45:13,335][INFO ][logstash.licensechecker.licensereader] Failed to perform request {:message=>"elasticsearch: Temporary failure in name resolution", :exception=>Manticore::ResolutionFailure, :cause=>java.net.UnknownHostException: elasticsearch: Temporary failure in name resolution}
+logstash_1  | [2022-09-01T21:45:13,342][WARN ][logstash.licensechecker.licensereader] Attempted to resurrect connection to dead ES instance, but got an error {:url=>"http://elasticsearch:9200/", :exception=>LogStash::Outputs::ElasticSearch::HttpClient::Pool::HostUnreachableError, :message=>"Elasticsearch Unreachable: [http://elasticsearch:9200/][Manticore::ResolutionFailure] elasticsearch: Temporary failure in name resolution"}
+
+grafana-monitoring-elastic-tick-kafka-ksql-c3-prometheus_example_1 exited with code 0
+```
+
 # 4. Elasticsearch
 
 It's kind of silly to grab stdout in such a convoluted way to export it back to `stdout`.
